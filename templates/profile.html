@@ -1,0 +1,96 @@
+<!--this will be used to display users profile and remove account feature, and view your reviews -->
+
+{% extends "base.html" %} {% block content %} {% if request.user.is_authenticated %}
+<center>
+	<div class="card">
+		<div class="card-body">
+			<p> Username : {{request.user.username}} </p>
+			<p> Email : {{request.user.email}} </p>
+			  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateAccountModal">
+        Update Account
+        </button>
+        <br/>
+        <br/>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAccountModal">
+        Delete Account
+        </button>
+    </div>
+  </div>
+  <br/>
+  {% for review in objs %}
+<div class="card">
+    <div class="card-body">
+      <div class="spaceBetween">
+        <h5 class="card-title">{{review.course.name}}</h5>
+        <div class="btn-group-small">
+          
+          <button class="btn btn"><i class="icon-thumbs-up"></i></button>
+          
+          <button class="btn btn"><i class="icon-thumbs-down"></i></button>
+          
+          <button class="btn btn-danger btn-xs">
+            <i class="icon-flag"></i>
+          </button>
+          <!-- <form action="flag_review" method='POST'>
+              {% csrf_token %}
+              <button class="btn btn-danger btn-xs"><i class="icon-flag"></i> Flag</button>
+          </form> -->
+        </div>
+      </div>
+      <h6 class="card-subtitle text-muted">from {{review.author.username}}. Year Taken: {{review.year_taken}}</h6>
+      <p class="card-text">{{review.content}}</p>
+      <p class="card-text"><small class="text-muted">Date Posted {{review.last_modified}}</small></p>
+    </div>
+  </div>
+  <br/>
+        
+{% endfor %}
+
+
+  <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete your account?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Keep Account</button>
+          <form action="delete_account" method='POST'>
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit" id = "delete_account_btn" name = "delete_account_btn">Delete Account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="updateAccountModal" tabindex="-1" role="dialog" aria-labelledby="updateAccountModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {% csrf_token %}
+          {{form}}
+            <button class="btn btn-primary" type="submit" id = "update_account_btn" name = "update_account_btn">Change password</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</center>
+{% else %}
+<center>
+	<p>User is not currently logged in</h1>
+</center>
+{% endif %}
+{% endblock content %}

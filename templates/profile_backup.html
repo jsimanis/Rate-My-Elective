@@ -1,0 +1,17 @@
+<!--this will be used to display users profile and remove account feature, and view your reviews -->
+
+{% extends "base.html" %} {% block content %} {% if request.user.is_authenticated %}
+<center>
+  <p> Username : {{request.user.username}} </p>
+  <p> Email : {{request.user.email}} </p>
+  <form action="delete_account" method='POST'>
+    {% csrf_token %}
+    <button class="w-100 mb-2 btn btn-danger" type="submit" id = "delete_account_btn" name = "delete_account_btn">Delete Account</button>
+  </form>
+</center>
+{% else %}
+<center>
+	<p>User is not currently logged in</h1>
+</center>
+{% endif %}
+{% endblock content %}

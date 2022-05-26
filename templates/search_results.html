@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+{% block content %} 
+<div class="container container-small mb-4">
+    <h3>Search Results</h3>
+
+{% for item in objs %}
+<div class="card mb-1 elective">
+      <div class="card-body">
+        <h5 class="card-title">{{item.department.code}} {{item.course_number}} {{item.name}}</h5>
+        <p class="card-text">
+          {{item.description}}
+        </p>
+      </div>
+</div>
+ <br/>
+{% endfor %}
+
+<p>Don't see your course listed? <a href="/add_class">Click here to add a new course! </a></p>
+{% endblock %}
+
+ 
+ 
+
+
+
+
+
+ 
+
+
+
+
+

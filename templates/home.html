@@ -1,0 +1,60 @@
+{% extends "base_home.html" %} {% block content %} 
+<!-- {% if request.user.is_authenticated %} -->
+<center>
+	<div class="bg-dark text-secondary px-4 py-5 text-center">
+		<div class="py-5">
+			<h1 class="display-5 fw-bold text-stay-white">Rate My Elective</h1>
+			<br/>
+				<div class="col-lg-6 mx-auto">
+					<form method="get" class="d-flex home-search">
+						<input
+            name="q"
+            value="{{ request.GET.q }}"
+            class="form-control me-2" type="search" placeholder="Search an elective..." aria-label="Search">
+          <!-- <button class="btn btn-outline-primary" type="submit">Search</button> -->
+    </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </center>
+  <br/><br/>
+  <div class="container container-small mb-4">
+    {% if objs %}
+    <h3 class="text-dark">Search Results</h3>
+    {% endif %}
+    <!-- <div class="card mb-1 elective">
+      <div class="card-body">
+        <h5 class="card-title">IT 326</h5>
+        <p class="card-text">
+          Fundamentals of software engineering. Topics include specification models, metrics, design fundamentals, interface design, quality assurance, and automated tools. Offered alternate years
+        </p>
+      </div>
+    </div> -->
+    {% for item in objs %}
+    <a class="no-decoration" href="{{ item.get_absolute_url }}">
+      <div class="card mb-1 elective"
+      id="{{item.course_number}}">
+        <div class="card-body">
+          <h5 class="card-title">{{item.department.code}} {{item.course_number}} {{item.name}}</h5>
+          <p class="card-text">
+            {{item.description}}
+          </p>
+        </div>
+      </div>
+    </a>
+
+    <br/>
+    {% endfor %}
+    {% if objs %}
+
+    {% endif %}
+    <p class="text-dark">Don't see your course listed? <a href="/add_class">Click here to add a new course! </a></p>
+      </div>
+
+{% else %}
+<center>
+	<p>User is not currently logged in</h1>
+</center>
+{% endif %}
+{% endblock content %}

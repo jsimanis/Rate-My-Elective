@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-auth w-100">
+	<h4>Register</h4>
+	<form enctype="multipart/form-data" method="POST">
+		{% csrf_token %} {% for field in form %}
+		<p>
+			{{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <div class="input-group mb-3">
+      <div class="g-recaptcha" data-sitekey="6Ldv4HQdAAAAAIePp9rwH-C7lMrBr175W1RiD6LG"></div>
+    </div>
+    <button class="w-100 btn btn-primary" type="submit">Register</button>
+      
+    <div>
+      </br>
+        <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+  </form>
+</div>
+{% endblock %}

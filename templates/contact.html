@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="form-auth w-100 text-dark">
+    <h4>Contact Us</h4>
+    <!-- <form action="{% url 'loginUser' %}" method="post"> -->
+      <form method="post">
+      {% csrf_token %}
+      {{form}}
+      <p class="mt-1"></p>
+      <button class="w-100 mb-2 btn btn-primary" type="submit">Send</button>
+      <div>
+      </div>
+    </form>
+</div>
+{% endblock %}
+

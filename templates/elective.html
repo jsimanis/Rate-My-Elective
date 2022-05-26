@@ -1,0 +1,163 @@
+{% extends "base.html" %} {% block content %}
+<!-- <h2>{{ elective.name }}</h2> -->
+<!-- This page is to display REVIEWS  -->
+<div class="card p-3">
+   {% if elective.flagged %}
+   <div>
+      <p class="text-danger text-center">This course has been flagged</p>
+   </div>
+   {% endif %}
+   <div class="row">
+      <div class="col-md-10">
+         <h3>{{ elective }}</h3>
+      </div>
+      <div class="col-md-2">
+         <button class="btn btn-danger btn-xs">
+         <i class="icon-flag"></i>
+         </button>
+      </div>
+   </div>
+   <p>{{ elective.description }}</p>
+   <button class="btn btn-primary btn-group-small mb-3" data-toggle="modal" data-target="#reviewModal">Add a Review</button>
+   <div class="form-auth w-100">
+      <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="reviewModalLabel">Create Review</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <form action="" method="POST" name="submit_new_review">
+                  <div class="modal-body">
+                     {% csrf_token %}
+                     {{form}}
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                     <button class="btn btn-primary" type="submit" id="create-review-btn" name="create-review-button">Create</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   {% for review in reviews %}
+   <div class="card">
+      <div class="card-body">
+         <div class="spaceBetween">
+            <h5 class="card-title">Review Title</h5>
+            <div class="btn-group-small">
+               <button class="btn btn"><i class="icon-thumbs-up"></i></button>
+               <!-- positive rating -->
+               <button class="btn btn"><i class="icon-thumbs-down"></i></button>
+               <!-- negative rating -->
+               <button class="btn btn-danger btn-xs">
+               <i class="icon-flag"></i>
+               </button>
+               <!-- <form action="flag_review" method='POST'>
+                  {% csrf_token %}
+                  <button class="btn btn-danger btn-xs"><i class="icon-flag"></i> Flag</button>
+                  </form> -->
+                {% if review.author == request.user %}
+               <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Edit
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                     <button type="button" class="btn btn-confirm" data-toggle="modal" data-target="#editReviewModel">
+                     Edit Review
+                     </button>
+                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteReviewModel">
+                     Delete Review
+                     </button>
+                  </div>
+               </div>
+               {% endif %}
+            <!-- </div> -->
+            <!-- This is where the button to edit a review should be -->
+            <div class="modal fade" id="editReviewModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                     </div>
+                     <form action="edit" form method='POST' name="edit_review">
+                        
+                        <div class="editReviewModal">
+                          {% csrf_token %}
+                           <textarea class="form-control" id="editReviewText" rows="3">{{review.content}}</textarea>
+                        </div>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <!-- <button class="btn btn-danger" type="submit" id="edit_review_btn" name="edit_review_btn">Save</button> -->
+                  <button class="btn btn-primary" type="submit" id="edit-review-btn" name="edit-review-button">Edit</button>
+                  </form>
+                  </div>>
+               </div>
+            </div>
+            
+         </div>
+      </div>
+      <h6 class="card-subtitle text-muted">from {{review.author.username}}. Year Taken: {{review.year_taken}}</h6>
+      <p class="card-text">{{review.content}}</p>
+      <p class="card-text"><small class="text-muted">Date Posted {{review.last_modified}}</small></p>
+      {% if review.flagged %}
+      <div>
+         <p class="text-danger text-center">This course has been flagged</p>
+      </div>
+      {% endif %}
+   </div>
+</div>
+<br/>
+{% endfor %}
+</div>
+<div class="modal fade" id="editReviewModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <textarea class="form-control" name="edit_review" rows="3">{{review.content}}</textarea>
+         </div>
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <form action="delete_account" method='POST'>
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit" id = "delete_account_btn" name = "delete_account_btn">Save</button>
+         </form>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="deleteReviewModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+   <div class="modal-content">
+      <div class="modal-header">
+         <h5 class="modal-title" id="revieweModalLabel">Confirmation</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      <div class="modal-body">
+         Are you sure you want to delete this review?
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Keep Review</button>
+         <form action="delete_review(review)" method='POST'>
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit" id = "delete_review_btn" name = "delete_review_btn">Delete Review</button>
+         </form>
+      </div>
+   </div>
+</div>
+{% endblock %}
