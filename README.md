@@ -1,4 +1,6 @@
 # RateMyElective
+This project was created by Spencer Kinney, Jacquelyn Simanis, Jakob Lybarger, Shawn O'Brien, and Gaberiel St.Angel.
+See the SRS document for in-depth information about this project.
 
 ## Technologies
 | Back-End       | Database    | Front-End     |
