@@ -78,14 +78,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'lwuuyyuf',
-    #     'USER': 'lwuuyyuf',
-    #     'PASSWORD': 'u89gwQWz3G5zU7LcBKsR_F858KExR4Yo',
-    #     'HOST': 'lallah.db.elephantsql.com',
-    #     'PORT': '5432',
-    # },
 }
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 4000
