@@ -125,16 +125,16 @@ ALLOWED_HOSTS = ['*']
 X_FRAME_OPTIONS = '*'
 
 # SMTP Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ratemyelective@gmail.com'
-EMAIL_HOST_PASSWORD = '4<DRhp83'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 
+# EMAIL_USE_TLS = 
+# EMAIL_HOST_USER = 
+#EMAIL_HOST_PASSWORD = 
 
 # User model
 # AUTH_USER_MODEL = 'website.UserAccount'
 
 # reCAPTCHA keys
-GOOGLE_RECAPTCHA_SITE_KEY="6Ldv4HQdAAAAAIePp9rwH-C7lMrBr175W1RiD6LG"
-GOOGLE_RECAPTCHA_SECRET_KEY="6Ldv4HQdAAAAAKBwlOxG4ZW4LW-hSDU9fs8uB66U"
+#GOOGLE_RECAPTCHA_SITE_KEY=
+#GOOGLE_RECAPTCHA_SECRET_KEY=
