@@ -1,5 +1,5 @@
 # RateMyElective
-This project was created by Spencer Kinney, Jacquelyn Simanis, Jakob Lybarger, Shawn O'Brien, and Gaberiel St.Angel.
+This project was created by Spencer Kinney, Jacquelyn Simanis, Jakob Lybarger, Shawn O'Brien, and Gabriel St.Angel.
 See the SRS document for in-depth information about this project.
 
 ## Technologies
@@ -11,7 +11,7 @@ See the SRS document for in-depth information about this project.
 ## Useful console commands
 - **python manage.py makemigrations** : prepares and generates SQL commands when changes are made to models.py
 - **python manage.py migrate** : executes SQL commands to make changes to table columns in database.
-- **python manage.py flush** : wipes database clean (pls dont troll).
+- **python manage.py flush** : wipes database clean
 - **python manage.py test** : runs all test cases in tests.py
 
 ## Resources
