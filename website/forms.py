@@ -126,6 +126,9 @@ class ContactForm(forms.ModelForm):
 class AddClassForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AddClassForm, self).__init__(*args, **kwargs)
+        self.fields['department'].widget.attrs.update({'class': 'form-control'})
+        self.fields['course_number'].widget.attrs.update({'class': 'form-control'})
+
 
     department = forms.ModelChoiceField(Department.objects.all())
     course_number = forms.IntegerField(min_value = 100, max_value=499)

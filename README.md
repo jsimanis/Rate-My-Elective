@@ -5,7 +5,7 @@ See the SRS document for in-depth information about this project.
 ## Technologies
 | Back-End       | Database    | Front-End     |
 | :---           |    :----:   |          ---: |
-| Python         | PostgreSQL  | HTML/CSS      |
+| Python         | SQLite      | HTML/CSS      |
 | Django         | SQL         | JavaScript    |
 
 ## Useful console commands

@@ -49,7 +49,7 @@ def elective(request, department, classNum):
                 form = ReviewForm()
                 return HttpResponseRedirect(url)
         elif request.method=='POST':
-        
+            pass
         else:
           
           form = ReviewForm()

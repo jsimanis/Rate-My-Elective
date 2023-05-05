@@ -45,11 +45,14 @@
     </a>
 
     <br/>
+    {% empty %}
+ <p>---No Courses Found---</p>
+ <p>Don't see your course listed? <a href="/add_class">Click here to add a new course! </a></p>
     {% endfor %}
     {% if objs %}
 
     {% endif %}
-    <p class="text-dark">Don't see your course listed? <a href="/add_class">Click here to add a new course! </a></p>
+    <!-- <p class="text-dark">Don't see your course listed? <a href="/add_class">Click here to add a new course! </a></p> -->
       </div>
 
 {% else %}
