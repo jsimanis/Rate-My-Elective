@@ -43,7 +43,24 @@
     {% empty%}
 <p>---No Courses Found---</p>
     <p>Don't see your course listed? <a href="/add_class">Click here to add a new course! </a></p>
-    
+    <br/> <br/>
+    <p>Other courses</p>
+    {% for item in other_classes %}
+    <a class="no-decoration" href="{{ item.get_absolute_url }}">
+      <div class="card mb-1 elective"
+      id="{{item.course_number}}">
+        <div class="card-body">
+          <h5 class="card-title">{{item.department.code}} {{item.course_number}} {{item.name}}</h5>
+          <p class="card-text">
+            {{item.description}}
+          </p>
+        </div>
+      </div>
+    </a>
+
+    <br/>
+    {% endfor %}
+
     {% endfor %}
    
     {% endif %}

@@ -22,6 +22,9 @@ def home(request):
             | Q(name__icontains=query)
             | Q(course_number__icontains=query)
             | Q(department__code__icontains=query))
+        if len(objs)==0:
+            objs = Course.objects.all()
+            return render(request, "home.html", {'other_classes': objs})
 
         return render(request, "home.html", {'objs': objs})
     else:
