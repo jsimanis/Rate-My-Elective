@@ -75,15 +75,9 @@ class UserRegisterForm(UserCreationForm):
 class ReviewForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
       super(ReviewForm, self).__init__(*args, **kwargs)
+      self.fields['year_taken'].widget.attrs.update({'class': 'form-control'})
 
-    year_taken = forms.CharField(
-      label="Year Taken",
-      widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': '',
-        'id': 'year'
-      })
-    )
+    year_taken = forms.IntegerField(min_value = 2005)
     content = forms.CharField(
       label="Content",
       widget=forms.Textarea(attrs={
@@ -95,7 +89,7 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
       model = Review
-      fields = ["author", "course", "year_taken", "content"]
+      fields = ["year_taken", "content"]
 
 class ContactForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

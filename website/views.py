@@ -44,6 +44,8 @@ def elective(request, department, classNum):
            
             form = ReviewForm(request.POST)
             if form.is_valid():
+                form.instance.course= elective_obj
+                form.instance.author=User.objects.get(id=current_user.id)
                 form.save()
                 form = ReviewForm()
                 return HttpResponseRedirect(url)

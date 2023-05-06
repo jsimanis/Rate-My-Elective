@@ -22,16 +22,10 @@
 <div class="card">
     <div class="card-body">
       <div class="spaceBetween">
-        <h5 class="card-title">{{review.course.name}}</h5>
+        <h5 class="card-title">{{review.course.department}} {{review.course.course_number}} {{review.course.name}}</h5>
         <div class="btn-group-small">
           
-          <button class="btn btn"><i class="icon-thumbs-up"></i></button>
           
-          <button class="btn btn"><i class="icon-thumbs-down"></i></button>
-          
-          <button class="btn btn-danger btn-xs">
-            <i class="icon-flag"></i>
-          </button>
           <!-- <form action="flag_review" method='POST'>
               {% csrf_token %}
               <button class="btn btn-danger btn-xs"><i class="icon-flag"></i> Flag</button>

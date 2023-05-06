@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 <!-- <h2>{{ elective.name }}</h2> -->
-<!-- This page is to display REVIEWS  -->
+<!-- This page is to display a COURSE and its reviews  -->
 <div class="card p-3">
    {% if elective.flagged %}
    <div>
@@ -47,7 +47,7 @@
    <div class="card">
       <div class="card-body">
          <div class="spaceBetween">
-            <h5 class="card-title">Review Title</h5>
+            <h5 class="card-title">By {{review.author.username}}</h5>
             <div class="btn-group-small">
                <button class="btn btn"><i class="icon-thumbs-up"></i></button>
                <!-- positive rating -->
@@ -104,9 +104,12 @@
             
          </div>
       </div>
-      <h6 class="card-subtitle text-muted">from {{review.author.username}}. Year Taken: {{review.year_taken}}</h6>
-      <p class="card-text">{{review.content}}</p>
+      <p class="card-text">{{review.content}}</p><br>
+      <h6 class="card-subtitle text-muted">Year Taken: {{review.year_taken}}</h6>
       <p class="card-text"><small class="text-muted">Date Posted {{review.last_modified}}</small></p>
+
+
+
       {% if review.flagged %}
       <div>
          <p class="text-danger text-center">This course has been flagged</p>
