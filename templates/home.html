@@ -1,5 +1,4 @@
 {% extends "base_home.html" %} {% block content %} 
-<!-- {% if request.user.is_authenticated %} -->
 <center>
 	<div class="bg-dark text-secondary px-4 py-5 text-center">
 		<div class="py-5">
@@ -10,7 +9,7 @@
 						<input
             name="q"
             value="{{ request.GET.q }}"
-            class="form-control me-2" type="search" placeholder="Search an elective..." aria-label="Search">
+            class="form-control me-2" type="search" placeholder="Search an elective by name, department, or number" aria-label="Search">
           <!-- <button class="btn btn-outline-primary" type="submit">Search</button> -->
     </form>
         </div>
@@ -20,18 +19,12 @@
   </center>
   <br/><br/>
   <div class="container container-small mb-4">
-    {% if objs %}
+    {% if no_query %}
+
+
+    {% else %}
     <h3 class="text-dark">Search Results</h3>
-    {% endif %}
-    <!-- <div class="card mb-1 elective">
-      <div class="card-body">
-        <h5 class="card-title">IT 326</h5>
-        <p class="card-text">
-          Fundamentals of software engineering. Topics include specification models, metrics, design fundamentals, interface design, quality assurance, and automated tools. Offered alternate years
-        </p>
-      </div>
-    </div> -->
-    {% for item in objs %}
+   {% for item in objs %}
     <a class="no-decoration" href="{{ item.get_absolute_url }}">
       <div class="card mb-1 elective"
       id="{{item.course_number}}">
@@ -45,19 +38,30 @@
     </a>
 
     <br/>
-    {% empty %}
- <p>---No Courses Found---</p>
- <p>Don't see your course listed? <a href="/add_class">Click here to add a new course! </a></p>
-    {% endfor %}
-    {% if objs %}
+    
 
+    {% empty%}
+<p>---No Courses Found---</p>
+    <p>Don't see your course listed? <a href="/add_class">Click here to add a new course! </a></p>
+    
+    {% endfor %}
+   
     {% endif %}
-    <!-- <p class="text-dark">Don't see your course listed? <a href="/add_class">Click here to add a new course! </a></p> -->
+
+    
+    
+   
+    <!-- <div class="card mb-1 elective">
+      <div class="card-body">
+        <h5 class="card-title">IT 326</h5>
+        <p class="card-text">
+          Fundamentals of software engineering. Topics include specification models, metrics, design fundamentals, interface design, quality assurance, and automated tools. Offered alternate years
+        </p>
+      </div>
+    </div> -->
+    
+    
       </div>
 
-{% else %}
-<center>
-	<p>User is not currently logged in</h1>
-</center>
-{% endif %}
+
 {% endblock content %}

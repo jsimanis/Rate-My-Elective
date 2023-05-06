@@ -14,23 +14,19 @@ from django.db.models import Q
 
 
 def home(request):
-    query = request.GET.get('q')
+    if 'q' in request.GET:
+        query = request.GET.get('q')
+        objs = Course.objects.filter(
+            (Q(course_number__icontains=query) and Q(
+                department__code__icontains=query))
+            | Q(name__icontains=query)
+            | Q(course_number__icontains=query)
+            | Q(department__code__icontains=query))
 
-    current_user = request.user
-    if current_user.is_authenticated:
-        if query:
-            objs = Course.objects.filter(
-                (Q(course_number__icontains=query) and Q(
-                    department__code__icontains=query))
-                | Q(name__icontains=query)
-                | Q(course_number__icontains=query)
-                | Q(department__code__icontains=query))
-
-            return render(request, "home.html", {'objs': objs})
-        else:
-            return render(request, "home.html")
+        return render(request, "home.html", {'objs': objs})
     else:
-        return redirect(loginUser)
+        return render(request, "home.html", {'no_query':True})
+    
 
 
 def elective(request, department, classNum):
